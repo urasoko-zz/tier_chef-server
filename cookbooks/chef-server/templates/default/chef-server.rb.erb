@@ -1,0 +1,15 @@
+topology "tier"
+
+server "<%= node['chef-server']['backend']['fqdn'] %>",
+  :ipaddress => "<%= node['chef-server']['backend']['ipaddr'] %>",
+  :role => "backend",
+  :bootstrap => true
+
+backend_vip "<%= node['chef-server']['backend']['fqdn'] %>",
+  :ipaddress => "<%= node['chef-server']['backend']['ipaddr'] %>"
+
+server "<%= node['chef-server']['frontend']['fqdn'] %>",
+  :ipaddress => "<%= node['chef-server']['frontend']['ipaddr'] %>",
+  :role => "frontend"
+
+api_fqdn "<%= node['chef-server']['frontend']['fqdn'] %>"
